@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# OCR/System temp files
+*.log

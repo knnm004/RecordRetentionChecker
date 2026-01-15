@@ -1,6 +1,14 @@
 
 # RecordRetentionChecker
 
+**User Message**
+
+![alt text](https://github.com/knnm004/RecordRetentionChecker/blob/main/assets/screenshot_userinput.jpg?raw=True)
+
+**Final Result from Agent** 
+
+![alt text](https://github.com/knnm004/RecordRetentionChecker/blob/main/assets/screenshot_agentresponse.jpg?raw=True)
+
 I developed this project based on my experience with record management during my academic years. While researching the local organization, I realized that small and medium-sized teams often cannot prioritize record management. With limited staff and heavy workloads, following complex retention protocols becomes a significant burden. I created RecordRetentionChecker to simplify this process and provide much-needed support to these overworked teams.
 
 ## Key Features
@@ -51,7 +59,22 @@ A staff member at a provincial health office needs to know if they can destroy a
 | **Retention Period** | 10 Years |
 | **Eligible for Destruction?** | **NO** - This document is from 2025. It must be retained until 2035. |
 
+## Limitations
 
+### 1. Model Dependency
+- **Gemini 2.0 Flash**: This project is optimized for the Gemini 2.0 Flash model. While fast and efficient, the accuracy of the final "retention verdict" depends on the model's ability to reason through Thai regulations.
+- **Hallucination Risk**: Like all Large Language Models (LLMs), the agent may occasionally misinterpret complex legal nuances or provide incorrect dates if the OCR text is garbled. Always verify the final output against official sources.
+
+### 2. Language & File Support
+- **Language**: The core logic is designed for **Thai Government Documents**. While it uses English for reasoning, the date parsing and OCR are specifically tuned for Thai Buddhist Era (BE) formats. It may not perform as intended on international documents or other calendar systems.
+- **Handwriting**: The OCR engine (Tesseract) works best on typed, printed text. Handwritten notes, signatures, or highly degraded physical scans may lead to poor text extraction and incorrect results.
+
+### 3. OCR & Image Quality
+- **Resolution**: Low-resolution scans (below 300 DPI) may result in "noise" that confuses the Thai character recognition, leading to errors in the extracted year or document title.
+- **Complex Layouts**: Documents with multi-column layouts, heavy watermarks, or complex tables may cause the OCR to read text out of order, impacting the agent's understanding.
+
+### 4. Internet Connectivity
+- **Web Search**: The `search_thai_retention_rules` tool requires an active internet connection to query DuckDuckGo and official government portals. If the search results are blocked or the site is down, the agent may default to general knowledge rather than specific, up-to-date laws.
 
 ## 📂 Project Structure
 
@@ -65,4 +88,5 @@ RecordRetentionChecker/
 ├── agent.py           # Main logic, tools, and agent definition
 ├── README.md          # Project documentation
 └── requirements.txt   # List of Python dependencies
+
 
